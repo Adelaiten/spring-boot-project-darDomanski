@@ -39,4 +39,13 @@ public class AuthorController {
     public Author updateAuthor(@RequestBody Author author) {
         return authorRepository.save(author);
     }
+
+    @DeleteMapping("/author/{id}")
+    public String deleteAuthor(@PathVariable Long id) {
+        if(authorRepository.existsById(id)) {
+            authorRepository.deleteById(id);
+            return "deleted";
+        }
+        return "author do not exist in database!";
+    }
 }
