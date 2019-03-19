@@ -24,4 +24,9 @@ public class AuthorService {
     public Author save(Author author) {
         return authorRepository.save(author);
     }
+
+
+    public boolean existsById(Long id) {
+        return authorRepository.existsById(id);
+    }
 }
