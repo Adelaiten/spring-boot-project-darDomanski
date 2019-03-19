@@ -1,22 +1,22 @@
 package com.codecool.BookShop.model;
 
 public class Genre {
-    private int id;
+    private long id;
     private String genre;
 
     protected Genre(){}
 
 
-    public Genre(int id, String genre) {
+    public Genre(long id, String genre) {
         this.id = id;
         this.genre = genre;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

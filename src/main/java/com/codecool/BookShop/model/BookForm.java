@@ -1,21 +1,21 @@
 package com.codecool.BookShop.model;
 
 public class BookForm {
-    private int id;
+    private long id;
     private String form;
 
     protected BookForm() {}
 
-    public BookForm(int id, String form) {
+    public BookForm(long id, String form) {
         this.id = id;
         this.form = form;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
