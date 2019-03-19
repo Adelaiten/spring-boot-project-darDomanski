@@ -1,22 +1,31 @@
 package com.codecool.BookShop.model;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "books")
 public class Book {
+    @Id
+    @GeneratedValue
     private long id;
     private String title;
+    @ManyToMany
     private List<Author> authors;
+    @OneToOne
     private Genre genre;
+    @OneToOne
     private Publisher publisher;
     private Date releaseDate;
     private double price;
     private int inStockAmount;
-    private BookForm bookForm;
+    @ManyToMany
+    private List<BookForm>bookForm;
 
     protected Book(){}
 
-    public Book(long id, String title, List<Author> authors, Genre genre, Publisher publisher, Date releaseDate, double price, int inStockAmount, BookForm bookForm) {
+    public Book(long id, String title, List<Author> authors, Genre genre, Publisher publisher, Date releaseDate, double price, int inStockAmount, List<BookForm> bookForm) {
         this.id = id;
         this.title = title;
         this.authors = authors;
@@ -92,11 +101,11 @@ public class Book {
         this.inStockAmount = inStockAmount;
     }
 
-    public BookForm getBookForm() {
+    public List<BookForm> getBookForm() {
         return bookForm;
     }
 
-    public void setBookForm(BookForm bookForm) {
+    public void setBookForm(List<BookForm> bookForm) {
         this.bookForm = bookForm;
     }
 }
