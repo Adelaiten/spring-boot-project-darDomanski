@@ -32,7 +32,7 @@ public class BooksFormController {
         }
 
         @DeleteMapping("/bookForm/{id}")
-        public void deleteBooksFOrm(@PathVariable long id) {
+        public void deleteBooksForm(@PathVariable long id) {
             bookFormService.deleteById(id);
         }
 

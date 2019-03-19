@@ -19,12 +19,12 @@ public class GenreController {
         private GenreService genreService;
 
         @GetMapping("/genre")
-        public List<Genre> retrieveAllgenreForm() {
+        public List<Genre> retrieveAllGenre() {
             return genreService.findAll();
         }
 
         @GetMapping("/genre/{id}")
-        public Genre retrieveBookForm(@PathVariable long id) {
+        public Genre retrieveGenre(@PathVariable long id) {
             Optional< Genre > genre = genreService.findById(id);
 //            if (!bookform.isPresent())
 //                throw new StudentNotFoundException("id-" + id);

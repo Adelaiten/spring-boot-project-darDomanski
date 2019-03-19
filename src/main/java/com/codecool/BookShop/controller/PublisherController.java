@@ -34,7 +34,7 @@ public class PublisherController {
         }
 
         @DeleteMapping("/publisher/{id}")
-        public void deleteGenre(@PathVariable long id) {
+        public void deletePublisher(@PathVariable long id) {
             publisherService.deleteById(id);
         }
 
