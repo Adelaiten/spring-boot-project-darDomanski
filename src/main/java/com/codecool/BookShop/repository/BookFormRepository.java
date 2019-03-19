@@ -9,8 +9,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookFormRepository extends JpaRepository<BookForm, Long >  {
 
-
-
-
-
 }

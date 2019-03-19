@@ -9,7 +9,7 @@ import java.util.List;
 public class Book {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String title;
     @ManyToMany
     private List<Author> authors;
@@ -18,14 +18,14 @@ public class Book {
     @OneToOne
     private Publisher publisher;
     private Date releaseDate;
-    private double price;
-    private int inStockAmount;
+    private Double price;
+    private Integer inStockAmount;
     @ManyToMany
     private List<BookForm>bookForm;
 
     protected Book(){}
 
-    public Book(long id, String title, List<Author> authors, Genre genre, Publisher publisher, Date releaseDate, double price, int inStockAmount, List<BookForm> bookForm) {
+    public Book(String title, List<Author> authors, Genre genre, Publisher publisher, Date releaseDate, double price, int inStockAmount, List<BookForm> bookForm) {
         this.id = id;
         this.title = title;
         this.authors = authors;

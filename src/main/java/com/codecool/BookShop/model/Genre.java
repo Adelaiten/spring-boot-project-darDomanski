@@ -16,7 +16,7 @@ public class Genre {
     protected Genre(){}
 
 
-    public Genre(long id, String genre) {
+    public Genre(String genre) {
         this.id = id;
         this.genre = genre;
     }

@@ -14,10 +14,9 @@ public class Author {
     private String name;
     private String surname;
 
-    protected Author() {}
+    Author() {}
 
-    public Author(long id, String name, String surname) {
-        this.id = id;
+    public Author(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
