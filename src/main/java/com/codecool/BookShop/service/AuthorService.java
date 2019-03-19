@@ -5,6 +5,7 @@ import com.codecool.BookShop.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public class AuthorService {
     @Autowired
@@ -12,5 +13,9 @@ public class AuthorService {
 
     public List<Author> findAll() {
         return authorRepository.findAll();
+    }
+
+    public Optional<Author> findById(Long id) {
+        return authorRepository.findById(id);
     }
 }
