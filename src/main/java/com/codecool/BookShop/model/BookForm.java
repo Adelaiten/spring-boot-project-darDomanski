@@ -1,6 +1,11 @@
 package com.codecool.BookShop.model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class BookForm {
+    @Id
+    @GeneratedValue
     private long id;
     private String form;
 
