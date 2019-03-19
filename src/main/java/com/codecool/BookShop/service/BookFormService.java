@@ -15,9 +15,6 @@ public class BookFormService  {
     @Autowired
     private BookFormRepository bookFormRepository;
 
-//    public List<BookForm> retrieveAllbooksForm() {
-////        return bookFormRepository.findAll();
-////    }
 
     public List<BookForm> findAll(){
         return bookFormRepository.findAll();
