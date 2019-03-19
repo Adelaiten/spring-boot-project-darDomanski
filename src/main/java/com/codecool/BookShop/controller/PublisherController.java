@@ -1,6 +1,7 @@
 package com.codecool.BookShop.controller;
 
 import com.codecool.BookShop.model.Genre;
+import com.codecool.BookShop.model.Publisher;
 import com.codecool.BookShop.service.GenreService;
 import com.codecool.BookShop.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +21,16 @@ public class PublisherController {
         private PublisherService publisherService;
 
         @GetMapping("/publisher")
-        public List<Genre> retrieveAllgenreForm() {
+        public List<Publisher> retrieveAllPublisher() {
             return publisherService.findAll();
         }
 
         @GetMapping("/publisher/{id}")
-        public Genre retrieveBookForm(@PathVariable long id) {
-            Optional< Genre > genre = publisherService.findById(id);
+        public Publisher retrievePublisher(@PathVariable long id) {
+            Optional<Publisher> publisher = publisherService.findById(id);
 //            if (!bookform.isPresent())
 //                throw new PublisherNotFoundException("id-" + id);
-            return genre.get();
+            return publisher.get();
         }
 
         @DeleteMapping("/publisher/{id}")
@@ -38,12 +39,11 @@ public class PublisherController {
         }
 
         @PostMapping("/publisher")
-        public ResponseEntity<Object> createGenre(@RequestBody Genre genre) {
-            Genre savedGenre = publisherService.save(genre);
+        public ResponseEntity<Object> createPublisher(@RequestBody Publisher publisher) {
+            Publisher savedPublisher = publisherService.save(publisher);
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                    .buildAndExpand(savedGenre.getId()).toUri();
+                    .buildAndExpand(savedPublisher.getId()).toUri();
             return ResponseEntity.created(location).build();
         }
-
 
 }
