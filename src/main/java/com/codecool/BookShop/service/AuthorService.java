@@ -29,4 +29,9 @@ public class AuthorService {
     public boolean existsById(Long id) {
         return authorRepository.existsById(id);
     }
+
+
+    public void deleteById(Long id) {
+        authorRepository.deleteById(id);
+    }
 }
