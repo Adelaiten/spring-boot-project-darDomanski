@@ -21,8 +21,16 @@ public class AuthorController {
 
     @PostMapping("/author")
     public Author addAuthor(@RequestBody Author author) {
+        Long authorId = author.getId();
+        if(authorId != null && authorRepository.existsById(authorId)) {
+            return null;
+        }
+        author.setId(null);
         return authorRepository.save(author);
     }
 
-
+    @PutMapping("/author")
+    public Author updateAuthor(@RequestBody Author author) {
+        return authorRepository.save(author);
+    }
 }
