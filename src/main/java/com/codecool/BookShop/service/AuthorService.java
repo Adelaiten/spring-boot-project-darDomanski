@@ -15,7 +15,13 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
+
     public Optional<Author> findById(Long id) {
         return authorRepository.findById(id);
+    }
+
+
+    public Author save(Author author) {
+        return authorRepository.save(author);
     }
 }
