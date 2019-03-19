@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -17,6 +18,11 @@ public class AuthorController {
     @GetMapping("/authors")
     public List<Author> retrieveAllAuthors() {
         return authorRepository.findAll();
+    }
+
+    @GetMapping("/author/{id}")
+    public Optional<Author> retrieveAuthorById(@PathVariable Long id) {
+        return authorRepository.findById(id);
     }
 
     @PostMapping("/author")
