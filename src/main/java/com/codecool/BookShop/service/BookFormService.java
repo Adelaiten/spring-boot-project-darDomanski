@@ -13,26 +13,26 @@ import java.util.Optional;
 public class BookFormService  {
 
     @Autowired
-    private BookFormRepository bookFormRepository;
+    private BookFormService bookFormService;
 
 //    public List<BookForm> retrieveAllbooksForm() {
 ////        return bookFormRepository.findAll();
 ////    }
 
     public List<BookForm> findAll(){
-        return bookFormRepository.findAll();
+        return bookFormService.findAll();
     }
 
     public Optional<BookForm> findById(Long id){
-        return bookFormRepository.findById(id);
+        return bookFormService.findById(id);
     }
 
     public void deleteById(Long id){
-        bookFormRepository.deleteById(id);
+        bookFormService.deleteById(id);
     }
 
     public BookForm save(BookForm bookForm ) {
-        bookFormRepository.save(bookForm);
+        bookFormService.save(bookForm);
         return bookForm;
     }
 
