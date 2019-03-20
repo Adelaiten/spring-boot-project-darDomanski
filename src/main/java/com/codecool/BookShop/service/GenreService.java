@@ -39,5 +39,10 @@ public class GenreService {
         return genreRepository.existsById(id);
     }
 
+    public List<Genre> getGenreByGenreName(String genreName) {
+        return genreRepository.getGenresByGenreName(genreName);
+
+    }
+
 
 }
