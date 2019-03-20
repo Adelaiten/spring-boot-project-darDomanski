@@ -2,7 +2,9 @@ package com.codecool.BookShop.controller;
 
 import com.codecool.BookShop.model.Author;
 import com.codecool.BookShop.model.Book;
+import com.codecool.BookShop.model.BookForm;
 import com.codecool.BookShop.model.Genre;
+import com.codecool.BookShop.repository.BookFormRepository;
 import com.codecool.BookShop.repository.BookRepository;
 import com.codecool.BookShop.repository.GenreRepository;
 import com.codecool.BookShop.service.AuthorService;
@@ -25,6 +27,8 @@ public class BookController {
     @Autowired
     GenreService genreService;
 
+    @Autowired
+    BookFormRepository bookFormRepository;
 
     @GetMapping("/books")
     public List<Book> retrieveAllBooks() {
@@ -39,6 +43,23 @@ public class BookController {
     @PostMapping("/books")
     public Book addBook(@RequestBody Book book) {
         checkIfGenreExists(book);
+        List<BookForm> bookForms = book.getBookForm();
+        for(int i = 0; i < bookForms.size(); i++) {
+            String bookFormName = bookForms.get(i).getForm().toLowerCase();
+            book.getBookForm().get(i).setForm(bookFormName);
+            BookForm bookForm = null;
+            List<BookForm>  dbBookForms = new ArrayList<>();
+            try{
+                dbBookForms = bookFormRepository.getBookFormsByForm(bookFormName);
+            }catch(NullPointerException e) {
+                e.printStackTrace();
+            }
+
+            if(dbBookForms.size() > 0) {
+                bookForm = dbBookForms.get(0);
+                bookForms.set(i, bookForm);
+            }
+        }
 
         return bookRepository.save(book);
     }
