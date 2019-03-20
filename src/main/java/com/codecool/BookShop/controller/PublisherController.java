@@ -33,9 +33,18 @@ public class PublisherController {
             return publisher.get();
         }
 
+//        @DeleteMapping("/publisher/{id}")
+//        public void deletePublisher(@PathVariable long id) {
+//            publisherService.deleteById(id);
+//        }
+
         @DeleteMapping("/publisher/{id}")
-        public void deletePublisher(@PathVariable long id) {
-            publisherService.deleteById(id);
+        public String deletePublisher(@PathVariable Long id) {
+            if(publisherService.existsById(id)) {
+                publisherService.deleteById(id);
+                return "deleted";
+            }
+            return "Genre do not exist in database!";
         }
 
         @PostMapping("/publisher")
