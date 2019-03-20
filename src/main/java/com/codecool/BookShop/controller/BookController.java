@@ -43,6 +43,12 @@ public class BookController {
     @PostMapping("/books")
     public Book addBook(@RequestBody Book book) {
         checkIfGenreExists(book);
+        checkIfBookFormExists(book);
+
+        return bookRepository.save(book);
+    }
+
+    private void checkIfBookFormExists(@RequestBody Book book) {
         List<BookForm> bookForms = book.getBookForm();
         for(int i = 0; i < bookForms.size(); i++) {
             String bookFormName = bookForms.get(i).getForm().toLowerCase();
@@ -52,8 +58,6 @@ public class BookController {
 
             setBookFormIfBookFormListLongerThanOne(bookForms, i, dbBookForms);
         }
-
-        return bookRepository.save(book);
     }
 
     private List<BookForm> getBookFormsByForm(String bookFormName, List<BookForm> dbBookForms) {
