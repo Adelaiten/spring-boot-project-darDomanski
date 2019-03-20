@@ -47,7 +47,6 @@ public class GenreController {
             return "Genre do not exist in database!";
         }
 
-
 //        @PostMapping("/genre")
 //        public ResponseEntity<Object> createGenre(@RequestBody Genre genre) {
 //            Genre savedGenre = genreService.save(genre);
@@ -55,7 +54,6 @@ public class GenreController {
 //                    .buildAndExpand(savedGenre.getId()).toUri();
 //            return ResponseEntity.created(location).build();
 //        }
-
 
         @PostMapping("/genre")
         public Genre createBookForm(@RequestBody Genre genre) {
@@ -68,12 +66,10 @@ public class GenreController {
         }
 
 
-
-
-    @PutMapping("/genre")
-        public Genre updateGenre(@RequestBody Genre genre) {
-            return genreService.save(genre);
-        }
+        @PutMapping("/genre")
+            public Genre updateGenre(@RequestBody Genre genre) {
+                return genreService.save(genre);
+            }
 
 
 

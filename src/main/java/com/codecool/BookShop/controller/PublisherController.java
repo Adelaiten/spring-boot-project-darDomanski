@@ -47,15 +47,29 @@ public class PublisherController {
             return "Genre do not exist in database!";
         }
 
-        @PostMapping("/publisher")
-        public ResponseEntity<Object> createPublisher(@RequestBody Publisher publisher) {
-            Publisher savedPublisher = publisherService.save(publisher);
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                    .buildAndExpand(savedPublisher.getId()).toUri();
-            return ResponseEntity.created(location).build();
+//        @PostMapping("/publisher")
+//        public ResponseEntity<Object> createPublisher(@RequestBody Publisher publisher) {
+//            Publisher savedPublisher = publisherService.save(publisher);
+//            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//                    .buildAndExpand(savedPublisher.getId()).toUri();
+//            return ResponseEntity.created(location).build();
+//        }
+
+
+        @PostMapping("/genre")
+        public Publisher createPublisher(@RequestBody Publisher publisher) {
+            Long publisherId = publisher.getId();
+            if( publisherId != null && publisherService.existsById( publisherId ) ) {
+                return null;
+            }
+            publisher.setId( null );
+            return publisherService.save( publisher );
         }
 
-        @PutMapping("/publisher")
+
+
+
+    @PutMapping("/publisher")
         public Publisher updatePublisher(@RequestBody Publisher publisher) {
             return publisherService.save( publisher );
         }
