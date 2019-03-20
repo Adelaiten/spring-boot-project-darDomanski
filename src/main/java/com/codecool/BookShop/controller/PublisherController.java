@@ -55,23 +55,20 @@ public class PublisherController {
 //            return ResponseEntity.created(location).build();
 //        }
 
-
-        @PostMapping("/genre")
+        @PostMapping("/publisher")
         public Publisher createPublisher(@RequestBody Publisher publisher) {
             Long publisherId = publisher.getId();
             if( publisherId != null && publisherService.existsById( publisherId ) ) {
                 return null;
             }
-            publisher.setId( null );
+            publisher.setId(null);
             return publisherService.save( publisher );
         }
 
 
-
-
-    @PutMapping("/publisher")
-        public Publisher updatePublisher(@RequestBody Publisher publisher) {
-            return publisherService.save( publisher );
-        }
+        @PutMapping("/publisher")
+            public Publisher updatePublisher(@RequestBody Publisher publisher) {
+                return publisherService.save( publisher );
+            }
 
 }

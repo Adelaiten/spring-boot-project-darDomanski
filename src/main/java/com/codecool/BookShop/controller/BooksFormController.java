@@ -56,13 +56,12 @@ public class BooksFormController {
         @PostMapping("/bookForm")
         public BookForm createBookForm(@RequestBody BookForm bookForm) {
             Long bookFormId = bookForm.getId();
-            if( bookFormId != null && bookFormService.existsById( bookFormId) ) {
+            if( bookFormId != null && bookFormService.existsById( bookFormId ) ) {
                 return null;
             }
             bookForm.setId( null );
             return bookFormService.save( bookForm );
         }
-
 
         @PutMapping("/bookForm")
         public BookForm updateBookForm(@RequestBody BookForm bookForm) {
