@@ -48,15 +48,29 @@ public class GenreController {
         }
 
 
+//        @PostMapping("/genre")
+//        public ResponseEntity<Object> createGenre(@RequestBody Genre genre) {
+//            Genre savedGenre = genreService.save(genre);
+//            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//                    .buildAndExpand(savedGenre.getId()).toUri();
+//            return ResponseEntity.created(location).build();
+//        }
+
+
         @PostMapping("/genre")
-        public ResponseEntity<Object> createGenre(@RequestBody Genre genre) {
-            Genre savedGenre = genreService.save(genre);
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                    .buildAndExpand(savedGenre.getId()).toUri();
-            return ResponseEntity.created(location).build();
+        public Genre createBookForm(@RequestBody Genre genre) {
+            Long genreId = genre.getId();
+            if( genreId != null && genreService.existsById( genreId ) ) {
+                return null;
+            }
+            genre.setId( null );
+            return genreService.save( genre );
         }
 
-        @PutMapping("/genre")
+
+
+
+    @PutMapping("/genre")
         public Genre updateGenre(@RequestBody Genre genre) {
             return genreService.save(genre);
         }

@@ -45,13 +45,24 @@ public class BooksFormController {
             return "bookForm do not exist in database!";
         }
 
+//        @PostMapping("/bookForm")
+//        public ResponseEntity<Object> createBookForm(@RequestBody BookForm bookForm) {
+//            BookForm savedBookForm = bookFormService.save(bookForm);
+//            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//                    .buildAndExpand(savedBookForm.getId()).toUri();
+//            return ResponseEntity.created(location).build();
+//        }
+
         @PostMapping("/bookForm")
-        public ResponseEntity<Object> createBookForm(@RequestBody BookForm bookForm) {
-            BookForm savedBookForm = bookFormService.save(bookForm);
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                    .buildAndExpand(savedBookForm.getId()).toUri();
-            return ResponseEntity.created(location).build();
+        public BookForm createBookForm(@RequestBody BookForm bookForm) {
+            Long bookFormId = bookForm.getId();
+            if( bookFormId != null && bookFormService.existsById( bookFormId) ) {
+                return null;
+            }
+            bookForm.setId( null );
+            return bookFormService.save( bookForm );
         }
+
 
         @PutMapping("/bookForm")
         public BookForm updateBookForm(@RequestBody BookForm bookForm) {
