@@ -70,19 +70,16 @@ public class BookController {
         Genre genre = null;
         List<Genre> genres = new ArrayList<>();
         genres = getGenreByGenreName(genreName, genres);
-        genre = setGenreIfGenreListLongerThanOne(genre, genres);
-        setExistingGenreToBookIfExists(book, genre);
+        genre = setGenreIfGenreListLongerThanOne(book, genre, genres);
+
     }
 
-    private void setExistingGenreToBookIfExists(@RequestBody Book book, Genre genre) {
-        if(genre !=null) {
-            book.setGenre(genre);
-        }
-    }
 
-    private Genre setGenreIfGenreListLongerThanOne(Genre genre, List<Genre> genres) {
+
+    private Genre setGenreIfGenreListLongerThanOne(@RequestBody Book book, Genre genre, List<Genre> genres) {
         if(genres.size() > 0) {
             genre = genres.get(0);
+            book.setGenre(genre);
         }
         return genre;
     }
