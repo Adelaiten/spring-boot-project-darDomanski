@@ -1,7 +1,6 @@
 package com.codecool.BookShop.controller;
 
 import com.codecool.BookShop.model.Author;
-import com.codecool.BookShop.repository.AuthorRepository;
 import com.codecool.BookShop.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
