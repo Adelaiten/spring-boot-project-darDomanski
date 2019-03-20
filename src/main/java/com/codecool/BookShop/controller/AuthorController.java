@@ -20,12 +20,12 @@ public class AuthorController {
         return authorService.findAll();
     }
 
-    @GetMapping("/author/{id}")
+    @GetMapping("/authors/{id}")
     public Optional<Author> retrieveAuthorById(@PathVariable Long id) {
         return authorService.findById(id);
     }
 
-    @PostMapping("/author")
+    @PostMapping("/authors")
     public Author addAuthor(@RequestBody Author author) {
         Long authorId = author.getId();
         if(authorId != null && authorService.existsById(authorId)) {
@@ -35,12 +35,12 @@ public class AuthorController {
         return authorService.save(author);
     }
 
-    @PutMapping("/author")
+    @PutMapping("/authors")
     public Author updateAuthor(@RequestBody Author author) {
         return authorService.save(author);
     }
 
-    @DeleteMapping("/author/{id}")
+    @DeleteMapping("/authors/{id}")
     public String deleteAuthor(@PathVariable Long id) {
         if(authorService.existsById(id)) {
             authorService.deleteById(id);
