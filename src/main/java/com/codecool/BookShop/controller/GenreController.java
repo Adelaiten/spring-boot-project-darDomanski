@@ -33,10 +33,20 @@ public class GenreController {
             return genre.get();
         }
 
+//        @DeleteMapping("/genre/{id}")
+//        public void deleteGenre(@PathVariable long id) {
+//            genreService.deleteById(id);
+//        }
+
         @DeleteMapping("/genre/{id}")
-        public void deleteGenre(@PathVariable long id) {
-            genreService.deleteById(id);
+        public String deleteGenre(@PathVariable Long id) {
+            if(genreService.existsById(id)) {
+                genreService.deleteById(id);
+                return "deleted";
+            }
+            return "Genre do not exist in database!";
         }
+
 
         @PostMapping("/genre")
         public ResponseEntity<Object> createGenre(@RequestBody Genre genre) {
@@ -50,6 +60,7 @@ public class GenreController {
         public Genre updateGenre(@RequestBody Genre genre) {
             return genreService.save(genre);
         }
+
 
 
 }
