@@ -38,6 +38,12 @@ public class BookController {
 
     @PostMapping("/books")
     public Book addBook(@RequestBody Book book) {
+        checkIfGenreExists(book);
+
+        return bookRepository.save(book);
+    }
+
+    private void checkIfGenreExists(@RequestBody Book book) {
         String genreName = book.getGenre().getGenre().toLowerCase();
         book.getGenre().setGenre(genreName);
         Genre genre = null;
@@ -45,8 +51,6 @@ public class BookController {
         genres = getGenreByGenreName(genreName, genres);
         genre = setGenreIfGenreListLongerThanOne(genre, genres);
         setExistingGenreToBookIfExists(book, genre);
-
-        return bookRepository.save(book);
     }
 
     private void setExistingGenreToBookIfExists(@RequestBody Book book, Genre genre) {
