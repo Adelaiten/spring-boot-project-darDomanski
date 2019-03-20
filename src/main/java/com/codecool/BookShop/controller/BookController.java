@@ -44,11 +44,15 @@ public class BookController {
         List<Genre> genres = new ArrayList<>();
         genres = getGenreByGenreName(genreName, genres);
         genre = setGenreIfGenreListLongerThanOne(genre, genres);
+        setExistingGenreToBookIfExists(book, genre);
 
+        return bookRepository.save(book);
+    }
+
+    private void setExistingGenreToBookIfExists(@RequestBody Book book, Genre genre) {
         if(genre !=null) {
             book.setGenre(genre);
         }
-        return bookRepository.save(book);
     }
 
     private Genre setGenreIfGenreListLongerThanOne(Genre genre, List<Genre> genres) {
