@@ -46,4 +46,9 @@ public class PublisherController {
             return ResponseEntity.created(location).build();
         }
 
+        @PutMapping("/publisher")
+        public Publisher updatePublisher(@RequestBody Publisher publisher) {
+            return publisherService.save( publisher );
+        }
+
 }

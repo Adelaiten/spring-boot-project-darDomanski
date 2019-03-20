@@ -25,7 +25,6 @@ public class BookFormService  {
     }
 
     public void deleteById(Long id){
-
         bookFormRepository.deleteById(id);
     }
 
@@ -33,6 +32,12 @@ public class BookFormService  {
         bookFormRepository.save(bookForm);
         return bookForm;
     }
+
+    public boolean existsById(Long id) {
+        return bookFormRepository.existsById(id);
+    }
+
+
 
 
 }

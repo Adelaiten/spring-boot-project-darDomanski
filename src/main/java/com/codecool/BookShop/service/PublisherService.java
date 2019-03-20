@@ -35,5 +35,9 @@ public class PublisherService {
         return publisher;
     }
 
+    public boolean existsById(Long id) {
+        return publisherRepository.existsById(id);
+    }
+
 
 }

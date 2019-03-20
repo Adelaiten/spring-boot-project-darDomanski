@@ -1,5 +1,7 @@
 package com.codecool.BookShop.controller;
 
+import com.codecool.BookShop.model.Author;
+import com.codecool.BookShop.model.BookForm;
 import com.codecool.BookShop.model.Genre;
 import com.codecool.BookShop.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,11 @@ public class GenreController {
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                     .buildAndExpand(savedGenre.getId()).toUri();
             return ResponseEntity.created(location).build();
+        }
+
+        @PutMapping("/genre")
+        public Genre updateGenre(@RequestBody Genre genre) {
+            return genreService.save(genre);
         }
 
 

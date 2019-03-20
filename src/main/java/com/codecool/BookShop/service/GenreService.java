@@ -35,5 +35,9 @@ public class GenreService {
         return genre;
     }
 
+    public boolean existsById(Long id) {
+        return genreRepository.existsById(id);
+    }
+
 
 }
