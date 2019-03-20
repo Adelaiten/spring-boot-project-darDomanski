@@ -34,5 +34,8 @@ public class BookFormService  {
         return bookForm;
     }
 
+    public List<BookForm> getBookFormsByForm(String form) {
+        return bookFormRepository.getBookFormsByForm(form);
+    }
 
 }
