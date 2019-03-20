@@ -13,16 +13,20 @@ public class Book {
     @GeneratedValue
     private Long id;
     private String title;
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany
+    @Cascade({org.hibernate.annotations.CascadeType.PERSIST})
     private List<Author> authors;
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne
+    @Cascade({org.hibernate.annotations.CascadeType.PERSIST})
     private Genre genre;
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne
+    @Cascade({org.hibernate.annotations.CascadeType.PERSIST})
     private Publisher publisher;
     private Date releaseDate;
     private Double price;
     private Integer inStockAmount;
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany
+    @Cascade({org.hibernate.annotations.CascadeType.PERSIST})
     private List<BookForm>bookForm;
 
     protected Book(){}
