@@ -1,5 +1,7 @@
 package com.codecool.BookShop.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -11,16 +13,16 @@ public class Book {
     @GeneratedValue
     private Long id;
     private String title;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Author> authors;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Genre genre;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Publisher publisher;
     private Date releaseDate;
     private Double price;
     private Integer inStockAmount;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<BookForm>bookForm;
 
     protected Book(){}
@@ -37,11 +39,11 @@ public class Book {
         this.bookForm = bookForm;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
