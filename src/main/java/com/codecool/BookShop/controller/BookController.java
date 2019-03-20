@@ -47,21 +47,30 @@ public class BookController {
         for(int i = 0; i < bookForms.size(); i++) {
             String bookFormName = bookForms.get(i).getForm().toLowerCase();
             book.getBookForm().get(i).setForm(bookFormName);
-            BookForm bookForm = null;
             List<BookForm>  dbBookForms = new ArrayList<>();
-            try{
-                dbBookForms = bookFormRepository.getBookFormsByForm(bookFormName);
-            }catch(NullPointerException e) {
-                e.printStackTrace();
-            }
+            dbBookForms = getBookFormsByForm(bookFormName, dbBookForms);
 
-            if(dbBookForms.size() > 0) {
-                bookForm = dbBookForms.get(0);
-                bookForms.set(i, bookForm);
-            }
+            setBookFormIfBookFormListLongerThanOne(bookForms, i, dbBookForms);
         }
 
         return bookRepository.save(book);
+    }
+
+    private List<BookForm> getBookFormsByForm(String bookFormName, List<BookForm> dbBookForms) {
+        try{
+            dbBookForms = bookFormRepository.getBookFormsByForm(bookFormName);
+        }catch(NullPointerException e) {
+            e.printStackTrace();
+        }
+        return dbBookForms;
+    }
+
+    private void setBookFormIfBookFormListLongerThanOne(List<BookForm> bookForms, int i, List<BookForm> dbBookForms) {
+        BookForm bookForm;
+        if(dbBookForms.size() > 0) {
+            bookForm = dbBookForms.get(0);
+            bookForms.set(i, bookForm);
+        }
     }
 
     private void checkIfGenreExists(@RequestBody Book book) {
@@ -73,7 +82,6 @@ public class BookController {
         genre = setGenreIfGenreListLongerThanOne(book, genre, genres);
 
     }
-
 
 
     private Genre setGenreIfGenreListLongerThanOne(@RequestBody Book book, Genre genre, List<Genre> genres) {
