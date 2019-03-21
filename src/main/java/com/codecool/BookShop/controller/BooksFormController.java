@@ -1,50 +1,67 @@
 package com.codecool.BookShop.controller;
 
-import com.codecool.BookShop.model.BookForm;
-import com.codecool.BookShop.repository.BookFormRepository;
+import com.codecool.BookShop.model.*;
+import com.codecool.BookShop.service.BookFormService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @RestController
 public class BooksFormController {
 
         @Autowired
-        private BookFormRepository bookFormRepository;
+        private BookFormService bookFormService;
 
         @GetMapping("/bookForm")
         public List<BookForm> retrieveAllbooksForm() {
-            return bookFormRepository.findAll();
+            return bookFormService.findAll();
         }
 
         @GetMapping("/bookForm/{id}")
-//        public BookForm retrieveBookForm(@PathVariable long id) {
-//            Optional< BookForm > bookform = bookFormRepository.findById(id);
+        public BookForm retrieveBookForm(@PathVariable long id) {
+            Optional< BookForm > bookform = bookFormService.findById(id);
 //            if (!bookform.isPresent())
 //                throw new StudentNotFoundException("id-" + id);
-//            return bookform.get();
+            return bookform.get();
+        }
+
+//        @DeleteMapping("/bookForm/{id}")
+//        public void deleteBooksForm(@PathVariable long id) {
+//            bookFormService.deleteById(id);
 //        }
 
         @DeleteMapping("/bookForm/{id}")
-        public void deleteBooksFOrm(@PathVariable long id) {
-            bookFormRepository.deleteById(id);
+        public String deleteBooksForm(@PathVariable Long id) {
+            if(bookFormService.existsById(id)) {
+                bookFormService.deleteById(id);
+                return "deleted";
+            }
+            return "bookForm do not exist in database!";
         }
 
+//        @PostMapping("/bookForm")
+//        public ResponseEntity<Object> createBookForm(@RequestBody BookForm bookForm) {
+//            BookForm savedBookForm = bookFormService.save(bookForm);
+//            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//                    .buildAndExpand(savedBookForm.getId()).toUri();
+//            return ResponseEntity.created(location).build();
+//        }
+
         @PostMapping("/bookForm")
-        public ResponseEntity<Object> createBookForm(@RequestBody BookForm bookForm) {
-            BookForm savedBookForm = bookFormRepository.save(bookForm);
+        public BookForm createBookForm(@RequestBody BookForm bookForm) {
+            Long bookFormId = bookForm.getId();
+            if( bookFormId != null && bookFormService.existsById( bookFormId ) ) {
+                return null;
+            }
+            bookForm.setId( null );
+            return bookFormService.save( bookForm );
+        }
 
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                    .buildAndExpand(savedBookForm.getId()).toUri();
-
-            return ResponseEntity.created(location).build();
-
+        @PutMapping("/bookForm")
+        public BookForm updateBookForm(@RequestBody BookForm bookForm) {
+            return bookFormService.save(bookForm);
         }
 
 

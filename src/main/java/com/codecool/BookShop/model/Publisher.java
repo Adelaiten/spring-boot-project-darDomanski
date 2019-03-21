@@ -16,8 +16,7 @@ public class Publisher {
 
     protected Publisher() {}
 
-    public Publisher(int id, String publisherName, String country) {
-        this.id = id;
+    public Publisher(String publisherName, String country) {
         this.publisherName = publisherName;
         this.country = country;
     }
@@ -26,7 +25,7 @@ public class Publisher {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

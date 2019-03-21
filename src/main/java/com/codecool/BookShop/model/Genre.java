@@ -11,29 +11,29 @@ public class Genre {
     @Id
     @GeneratedValue
     private long id;
-    private String genre;
+    private String genreName;
 
     protected Genre(){}
 
 
-    public Genre(long id, String genre) {
+    public Genre(String genreName) {
         this.id = id;
-        this.genre = genre;
+        this.genreName = genreName;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public String getGenre() {
-        return genre;
+        return genreName;
     }
 
     public void setGenre(String genre) {
-        this.genre = genre;
+        this.genreName = genre;
     }
 }

@@ -15,7 +15,7 @@ public class BookForm {
 
     protected BookForm() {}
 
-    public BookForm(long id, String form) {
+    public BookForm(String form) {
         this.id = id;
         this.form = form;
     }
@@ -24,7 +24,7 @@ public class BookForm {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

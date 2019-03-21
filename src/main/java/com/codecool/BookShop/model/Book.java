@@ -1,31 +1,38 @@
 package com.codecool.BookShop.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "books")
 public class Book {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String title;
     @ManyToMany
+    @Cascade({org.hibernate.annotations.CascadeType.PERSIST})
     private List<Author> authors;
     @OneToOne
+    @Cascade({org.hibernate.annotations.CascadeType.PERSIST})
     private Genre genre;
     @OneToOne
+    @Cascade({org.hibernate.annotations.CascadeType.PERSIST})
     private Publisher publisher;
     private Date releaseDate;
-    private double price;
-    private int inStockAmount;
+    private Double price;
+    private Integer inStockAmount;
     @ManyToMany
+    @Cascade({org.hibernate.annotations.CascadeType.PERSIST})
     private List<BookForm>bookForm;
 
     protected Book(){}
 
-    public Book(long id, String title, List<Author> authors, Genre genre, Publisher publisher, Date releaseDate, double price, int inStockAmount, List<BookForm> bookForm) {
+    public Book(String title, List<Author> authors, Genre genre, Publisher publisher, Date releaseDate, double price, int inStockAmount, List<BookForm> bookForm) {
         this.id = id;
         this.title = title;
         this.authors = authors;
@@ -37,11 +44,11 @@ public class Book {
         this.bookForm = bookForm;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

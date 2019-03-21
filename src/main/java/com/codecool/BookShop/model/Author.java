@@ -10,23 +10,22 @@ import javax.persistence.Table;
 public class Author {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String name;
     private String surname;
 
-    protected Author() {}
+    Author() {}
 
-    public Author(long id, String name, String surname) {
-        this.id = id;
+    public Author(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
