@@ -10,4 +10,5 @@ import java.util.List;
 public interface PublisherRepository extends JpaRepository<Publisher, Long> {
     @Query(value="SELECT * FROM publishers WHERE publisher_name = :publisherName AND country = :country", nativeQuery = true)
     List<Publisher> getPublishersByPublisherNameAndCountry(@Param("publisherName") String publisherName, @Param("country") String country);
+
 }

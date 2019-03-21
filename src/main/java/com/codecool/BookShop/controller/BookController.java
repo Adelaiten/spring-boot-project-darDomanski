@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -128,6 +129,23 @@ public class BookController {
         }
         return genres;
     }
+
+
+    @GetMapping("/books/price>/{price}")
+    public List<Book> getBooksByPrice(@PathVariable Integer price) {
+        return bookService.getBooksByPrice(price);
+    }
+
+    @GetMapping("/books/amount>/{amount}")
+    public List<Book> getBooksByAmount(@PathVariable Integer amount) {
+        return bookService.getBooksByAmount(amount);
+    }
+
+    @GetMapping("/books/release/{date1},{date2}")
+    public List<Book> getBooksByADate(@PathVariable Date date1, @PathVariable Date date2) {
+        return bookService.getBooksByADate(date1,date2);
+    }
+
 
 
 
