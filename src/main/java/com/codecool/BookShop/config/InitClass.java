@@ -4,16 +4,16 @@ import com.codecool.BookShop.model.Role;
 import com.codecool.BookShop.model.User;
 import com.codecool.BookShop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class InitClass {
 
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("init")
+    @GetMapping("/init")
     public String init() {
         Role roleAdmin = new Role("admin");
         Role roleUser = new Role("user");
@@ -26,7 +26,7 @@ public class InitClass {
         userRepository.save(user1);
         userRepository.save(user2);
 
-
+        System.out.println("dupa");
         return "Basic resources initialized!";
     }
 }
