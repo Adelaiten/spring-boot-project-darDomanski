@@ -42,7 +42,16 @@ public class BookController {
         checkIfGenreExists(book);
         checkIfBookFormExists(book);
         checkIfAuthorExists(book);
-
+        Publisher publisher = book.getPublisher();
+        String publisherName = publisher.getPublisherName().toLowerCase();
+        String publisherCountry = publisher.getCountry().toLowerCase();
+        publisher.setPublisherName(publisherName);
+        publisher.setCountry(publisherCountry);
+        List<Publisher> dbPublishers = publisherService.getPublishersByPublisherNameAndCountry(publisherName, publisherCountry);
+        if(dbPublishers.size() > 0) {
+            Publisher dbPublisher = dbPublishers.get(0);
+            book.setPublisher(dbPublisher);
+        }
         return bookService.save(book);
     }
 
@@ -72,21 +81,12 @@ public class BookController {
         for(int i = 0; i < bookForms.size(); i++) {
             String bookFormName = bookForms.get(i).getForm().toLowerCase();
             book.getBookForm().get(i).setForm(bookFormName);
-            List<BookForm>  dbBookForms = new ArrayList<>();
-            dbBookForms = getBookFormsByForm(bookFormName, dbBookForms);
+            List<BookForm> dbBookForms = bookFormService.getBookFormsByForm(bookFormName);
 
             setBookFormIfBookFormListLongerThanOne(bookForms, i, dbBookForms);
         }
     }
 
-    private List<BookForm> getBookFormsByForm(String bookFormName, List<BookForm> dbBookForms) {
-        try{
-            dbBookForms = bookFormService.getBookFormsByForm(bookFormName);
-        }catch(NullPointerException e) {
-            e.printStackTrace();
-        }
-        return dbBookForms;
-    }
 
     private void setBookFormIfBookFormListLongerThanOne(List<BookForm> bookForms, int i, List<BookForm> dbBookForms) {
         if(dbBookForms.size() > 0) {
@@ -94,6 +94,7 @@ public class BookController {
             bookForms.set(i, bookForm);
         }
     }
+
 
     private void checkIfGenreExists(@RequestBody Book book) {
         String genreName = book.getGenre().getGenre().toLowerCase();
@@ -109,6 +110,7 @@ public class BookController {
             book.setGenre(genres.get(0));
         }
     }
+
 
     private List<Genre> getGenreByGenreName(String genreName, List<Genre> genres) {
         try{
