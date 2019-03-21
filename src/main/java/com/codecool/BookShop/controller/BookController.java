@@ -42,6 +42,11 @@ public class BookController {
         checkIfGenreExists(book);
         checkIfBookFormExists(book);
         checkIfAuthorExists(book);
+        checkIfPublisherExists(book);
+        return bookService.save(book);
+    }
+
+    private void checkIfPublisherExists(@RequestBody Book book) {
         Publisher publisher = book.getPublisher();
         String publisherName = publisher.getPublisherName().toLowerCase();
         String publisherCountry = publisher.getCountry().toLowerCase();
@@ -49,7 +54,6 @@ public class BookController {
         publisher.setCountry(publisherCountry);
         List<Publisher> dbPublishers = publisherService.getPublishersByPublisherNameAndCountry(publisherName, publisherCountry);
         setPublisherIfPublisherListLongerThanOne(book, dbPublishers);
-        return bookService.save(book);
     }
 
     private void setPublisherIfPublisherListLongerThanOne(@RequestBody Book book, List<Publisher> dbPublishers) {
