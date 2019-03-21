@@ -35,4 +35,8 @@ public class AuthorService {
     public void deleteById(Long id) {
         authorRepository.deleteById(id);
     }
+
+    public List<Author> getAuthorsByNameAndSurname(String name, String surname) {
+        return authorRepository.getAuthorsByNameAndSurname(name, surname);
+    }
 }

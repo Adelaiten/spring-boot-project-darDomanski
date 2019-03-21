@@ -1,8 +1,6 @@
 package com.codecool.BookShop.service;
 
-import com.codecool.BookShop.model.Genre;
 import com.codecool.BookShop.model.Publisher;
-import com.codecool.BookShop.repository.GenreRepository;
 import com.codecool.BookShop.repository.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +33,9 @@ public class PublisherService {
         return publisher;
     }
 
+    public List<Publisher> getPublishersByPublisherNameAndCountry(String publisherName, String country) {
+        return publisherRepository.getPublishersByPublisherNameAndCountry(publisherName, country);
+    }
     public boolean existsById(Long id) {
         return publisherRepository.existsById(id);
     }
