@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 public class BookController {
 
     @Autowired
@@ -26,6 +27,10 @@ public class BookController {
 
     @Autowired
     private AuthorService authorService;
+
+    @Autowired
+    private ArchiveService archiveService;
+
 
     @GetMapping("/books")
     public List<Book> retrieveAllBooks() {
@@ -44,6 +49,15 @@ public class BookController {
         checkIfAuthorExists(book);
         checkIfPublisherExists(book);
         return bookService.save(book);
+    }
+
+    @DeleteMapping("/books/{id}")
+    public String deleteBook(@PathVariable("id") Long id) {
+        Book book = bookService.getOne(id);
+        archiveService.addBookToArchive(book);
+        bookService.deleteById(id);
+
+        return "Deleted";
     }
 
     private void checkIfPublisherExists(@RequestBody Book book) {

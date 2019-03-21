@@ -20,8 +20,8 @@ public class BookService {
     }
 
 
-    public Optional<Book> findById(Long id) {
-        return bookRepository.findById(id);
+    public Book getOne(Long id) {
+        return bookRepository.getOne(id);
     }
 
 
@@ -31,5 +31,10 @@ public class BookService {
 
     public void deleteById(Long id) {
         bookRepository.deleteById(id);
+    }
+
+
+    public Optional<Book> findById(Long id) {
+        return bookRepository.findById(id);
     }
 }

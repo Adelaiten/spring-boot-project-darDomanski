@@ -26,7 +26,6 @@ public class InitClass {
         userRepository.save(user1);
         userRepository.save(user2);
 
-        System.out.println("dupa");
         return "Basic resources initialized!";
     }
 }
