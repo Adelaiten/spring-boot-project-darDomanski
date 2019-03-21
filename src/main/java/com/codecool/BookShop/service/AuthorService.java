@@ -3,6 +3,7 @@ package com.codecool.BookShop.service;
 import com.codecool.BookShop.model.Author;
 import com.codecool.BookShop.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,5 +35,9 @@ public class AuthorService {
 
     public void deleteById(Long id) {
         authorRepository.deleteById(id);
+    }
+
+    public List<Author> getAuthorsByNameAndSurname(String name, String surname) {
+        return authorRepository.getAuthorsByNameAndSurname(name, surname);
     }
 }
