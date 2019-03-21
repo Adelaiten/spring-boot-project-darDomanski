@@ -1,51 +1,70 @@
 package com.codecool.BookShop.controller;
 
-import com.codecool.BookShop.model.Author;
-import com.codecool.BookShop.model.Book;
-import com.codecool.BookShop.model.BookForm;
-import com.codecool.BookShop.model.Genre;
-import com.codecool.BookShop.repository.BookFormRepository;
-import com.codecool.BookShop.repository.BookRepository;
-import com.codecool.BookShop.repository.GenreRepository;
-import com.codecool.BookShop.service.AuthorService;
-import com.codecool.BookShop.service.GenreService;
+import com.codecool.BookShop.model.*;
+import com.codecool.BookShop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class BookController {
-    @Autowired
-    private BookRepository bookRepository;
 
     @Autowired
-    GenreService genreService;
+    private BookService bookService;
 
     @Autowired
-    BookFormRepository bookFormRepository;
+    private GenreService genreService;
+
+    @Autowired
+    private BookFormService bookFormService;
+
+    @Autowired
+    private PublisherService publisherService;
+
+    @Autowired
+    private AuthorService authorService;
 
     @GetMapping("/books")
     public List<Book> retrieveAllBooks() {
-        return bookRepository.findAll();
+        return bookService.findAll();
     }
 
     @GetMapping("/books/{id}")
     public Optional<Book> retrieveBookById(@PathVariable Long id) {
-        return bookRepository.findById(id);
+        return bookService.findById(id);
     }
 
     @PostMapping("/books")
     public Book addBook(@RequestBody Book book) {
         checkIfGenreExists(book);
         checkIfBookFormExists(book);
+        checkIfAuthorExists(book);
 
-        return bookRepository.save(book);
+        return bookService.save(book);
+    }
+
+    private void checkIfAuthorExists(@RequestBody Book book) {
+        List<Author> authors = book.getAuthors();
+        for(int i = 0; i < authors.size(); i++) {
+            Author author = authors.get(i);
+            String authorName = authors.get(i).getName().toLowerCase();
+            String authorSurname = authors.get(i).getSurname().toLowerCase();
+            author.setName(authorName);
+            author.setSurname(authorSurname);
+            List<Author> dbAuthors = authorService.getAuthorsByNameAndSurname(authorName, authorSurname);
+            setAuthorIfAuthorListLongerThanOne(authors, i, dbAuthors);
+
+        }
+    }
+
+    private void setAuthorIfAuthorListLongerThanOne(List<Author> authors, int i, List<Author> dbAuthors) {
+        if(dbAuthors.size() > 0) {
+            Author dbAuthor = dbAuthors.get(0);
+            authors.set(i, dbAuthor);
+        }
     }
 
     private void checkIfBookFormExists(@RequestBody Book book) {
@@ -62,7 +81,7 @@ public class BookController {
 
     private List<BookForm> getBookFormsByForm(String bookFormName, List<BookForm> dbBookForms) {
         try{
-            dbBookForms = bookFormRepository.getBookFormsByForm(bookFormName);
+            dbBookForms = bookFormService.getBookFormsByForm(bookFormName);
         }catch(NullPointerException e) {
             e.printStackTrace();
         }
@@ -70,9 +89,8 @@ public class BookController {
     }
 
     private void setBookFormIfBookFormListLongerThanOne(List<BookForm> bookForms, int i, List<BookForm> dbBookForms) {
-        BookForm bookForm;
         if(dbBookForms.size() > 0) {
-            bookForm = dbBookForms.get(0);
+            BookForm bookForm = dbBookForms.get(0);
             bookForms.set(i, bookForm);
         }
     }
@@ -80,20 +98,16 @@ public class BookController {
     private void checkIfGenreExists(@RequestBody Book book) {
         String genreName = book.getGenre().getGenre().toLowerCase();
         book.getGenre().setGenre(genreName);
-        Genre genre = null;
         List<Genre> genres = new ArrayList<>();
         genres = getGenreByGenreName(genreName, genres);
-        genre = setGenreIfGenreListLongerThanOne(book, genre, genres);
-
+        setGenreIfGenreListLongerThanOne(book, genres);
     }
 
 
-    private Genre setGenreIfGenreListLongerThanOne(@RequestBody Book book, Genre genre, List<Genre> genres) {
+    private void setGenreIfGenreListLongerThanOne(@RequestBody Book book, List<Genre> genres) {
         if(genres.size() > 0) {
-            genre = genres.get(0);
-            book.setGenre(genre);
+            book.setGenre(genres.get(0));
         }
-        return genre;
     }
 
     private List<Genre> getGenreByGenreName(String genreName, List<Genre> genres) {
