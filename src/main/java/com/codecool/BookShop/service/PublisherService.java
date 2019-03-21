@@ -5,6 +5,7 @@ import com.codecool.BookShop.model.Publisher;
 import com.codecool.BookShop.repository.GenreRepository;
 import com.codecool.BookShop.repository.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,5 +36,7 @@ public class PublisherService {
         return publisher;
     }
 
-
+    public List<Publisher> getPublishersByPublisherNameAndCountry(String publisherName, String country) {
+        return publisherRepository.getPublishersByPublisherNameAndCountry(publisherName, country);
+    }
 }
