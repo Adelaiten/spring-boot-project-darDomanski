@@ -69,4 +69,10 @@ public class BooksFormController {
         }
 
 
+        @GetMapping("/bookForm/gg")
+        public List<BookForm> myQuerry() {
+            return bookFormService.myOwnQuery();
+        }
+
+
 }

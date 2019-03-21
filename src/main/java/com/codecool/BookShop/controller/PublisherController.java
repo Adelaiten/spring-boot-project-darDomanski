@@ -1,14 +1,19 @@
 package com.codecool.BookShop.controller;
 
+import com.codecool.BookShop.CsvUtils;
 import com.codecool.BookShop.model.Genre;
 import com.codecool.BookShop.model.Publisher;
+import com.codecool.BookShop.repository.PublisherRepository;
 import com.codecool.BookShop.service.GenreService;
 import com.codecool.BookShop.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -70,5 +75,21 @@ public class PublisherController {
             public Publisher updatePublisher(@RequestBody Publisher publisher) {
                 return publisherService.save( publisher );
             }
+
+
+        @Autowired
+        private PublisherRepository publisherRepository;
+
+
+//        @PostMapping(value = "/upload_publisher", consumes = "text/csv")
+//        public void uploadSimple(@RequestBody InputStream body) throws IOException {
+//            publisherRepository.saveAll(CsvUtils.read(Publisher.class, body));
+//        }
+//
+//        @PostMapping(value = "/upload_publisher", consumes = "multipart/form-data")
+//        public void uploadMultipart(@RequestParam("file") MultipartFile file) throws IOException {
+//            publisherRepository.saveAll(CsvUtils.read(Publisher.class, file.getInputStream()));
+//        }
+
 
 }

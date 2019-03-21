@@ -37,7 +37,10 @@ public class BookFormService  {
         return bookFormRepository.existsById(id);
     }
 
-
+    public List<BookForm> myOwnQuery(){
+        List<BookForm> forms = bookFormRepository.myOwnQuery();
+        return forms;
+    }
 
 
 }
