@@ -146,7 +146,4 @@ public class BookController {
         return bookService.getBooksByADate(date1,date2);
     }
 
-
-
-
 }
