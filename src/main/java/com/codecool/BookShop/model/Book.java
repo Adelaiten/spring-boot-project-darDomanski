@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "books")
 public class Book {
     @Id
