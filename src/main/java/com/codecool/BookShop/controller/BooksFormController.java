@@ -26,15 +26,10 @@ public class BooksFormController {
         @GetMapping("/bookForm/{id}")
         public BookForm retrieveBookForm(@PathVariable long id) {
             Optional< BookForm > bookform = bookFormService.findById(id);
-//            if (!bookform.isPresent())
-//                throw new StudentNotFoundException("id-" + id);
             return bookform.get();
         }
 
-//        @DeleteMapping("/bookForm/{id}")
-//        public void deleteBooksForm(@PathVariable long id) {
-//            bookFormService.deleteById(id);
-//        }
+
 
         @DeleteMapping("/bookForm/{id}")
         public String deleteBooksForm(@PathVariable Long id) {
@@ -45,13 +40,6 @@ public class BooksFormController {
             return "bookForm do not exist in database!";
         }
 
-//        @PostMapping("/bookForm")
-//        public ResponseEntity<Object> createBookForm(@RequestBody BookForm bookForm) {
-//            BookForm savedBookForm = bookFormService.save(bookForm);
-//            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//                    .buildAndExpand(savedBookForm.getId()).toUri();
-//            return ResponseEntity.created(location).build();
-//        }
 
         @PostMapping("/bookForm")
         public BookForm createBookForm(@RequestBody BookForm bookForm) {
@@ -69,10 +57,10 @@ public class BooksFormController {
         }
 
 
-        @GetMapping("/bookForm/gg")
-        public List<BookForm> myQuerry() {
-            return bookFormService.myOwnQuery();
-        }
+//        @GetMapping("/bookForm/gg")
+//        public List<BookForm> myQuerry() {
+//            return bookFormService.myOwnQuery();
+//        }
 
 
 }

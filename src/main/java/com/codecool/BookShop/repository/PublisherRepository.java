@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PublisherRepository extends JpaRepository<Publisher, Long> {
 
-    void saveAll(List<Publisher> publisher);
+//    void saveAll(List<Publisher> publisher);
 
 }
 

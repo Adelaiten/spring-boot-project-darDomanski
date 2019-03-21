@@ -28,15 +28,10 @@ public class GenreController {
         @GetMapping("/genre/{id}")
         public Genre retrieveGenre(@PathVariable long id) {
             Optional< Genre > genre = genreService.findById(id);
-//            if (!bookform.isPresent())
-//                throw new StudentNotFoundException("id-" + id);
             return genre.get();
         }
 
-//        @DeleteMapping("/genre/{id}")
-//        public void deleteGenre(@PathVariable long id) {
-//            genreService.deleteById(id);
-//        }
+
 
         @DeleteMapping("/genre/{id}")
         public String deleteGenre(@PathVariable Long id) {
@@ -47,13 +42,6 @@ public class GenreController {
             return "Genre do not exist in database!";
         }
 
-//        @PostMapping("/genre")
-//        public ResponseEntity<Object> createGenre(@RequestBody Genre genre) {
-//            Genre savedGenre = genreService.save(genre);
-//            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//                    .buildAndExpand(savedGenre.getId()).toUri();
-//            return ResponseEntity.created(location).build();
-//        }
 
         @PostMapping("/genre")
         public Genre createBookForm(@RequestBody Genre genre) {
