@@ -1,8 +1,6 @@
 package com.codecool.BookShop.service;
 
-import com.codecool.BookShop.model.BookForm;
 import com.codecool.BookShop.model.Genre;
-import com.codecool.BookShop.repository.BookFormRepository;
 import com.codecool.BookShop.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
