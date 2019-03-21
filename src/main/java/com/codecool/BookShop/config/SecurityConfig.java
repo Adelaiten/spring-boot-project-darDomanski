@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .usernameParameter("username").passwordParameter("password")
                 .and()
-                .csrf();
+                .csrf().disable();
     }
 
     private PasswordEncoder getPasswordEncoder() {

@@ -1,12 +1,10 @@
 package com.codecool.BookShop.service;
 
 import com.codecool.BookShop.model.Book;
-import com.codecool.BookShop.model.Publisher;
 import com.codecool.BookShop.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +20,8 @@ public class BookService {
     }
 
 
-    public Optional<Book> findById(Long id) {
-        return bookRepository.findById(id);
+    public Book getOne(Long id) {
+        return bookRepository.getOne(id);
     }
 
 
@@ -51,4 +49,13 @@ public class BookService {
 
 
 
+
+    public void deleteById(Long id) {
+        bookRepository.deleteById(id);
+    }
+
+
+    public Optional<Book> findById(Long id) {
+        return bookRepository.findById(id);
+    }
 }
