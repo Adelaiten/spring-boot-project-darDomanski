@@ -5,6 +5,7 @@ import com.codecool.BookShop.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,14 +41,9 @@ public class BookService {
     }
 
 
-    public List<Book> getBooksByADate ( Date date1, Date date2  ) {
+    public List<Book> getBooksByADate (Date date1, Date date2  ) {
         return bookRepository.getBooksByADate( date1, date2 );
     }
-
-
-
-
-
 
 
     public void deleteById(Long id) {

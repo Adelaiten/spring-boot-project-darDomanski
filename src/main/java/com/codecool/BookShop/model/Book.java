@@ -15,12 +15,12 @@ public class Book {
     private Long id;
     private String title;
     @ManyToMany
-    @Cascade({org.hibernate.annotations.CascadeType.PERSIST})
+    @Cascade({org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.DELETE})
     private List<Author> authors;
-    @OneToOne
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.PERSIST})
     private Genre genre;
-    @OneToOne
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.PERSIST})
     private Publisher publisher;
     private Date releaseDate;
